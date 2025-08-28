@@ -45,13 +45,13 @@ export default function App() {
 
   // Variável para remover as tarefs --- arrumar depois
   const clearAllTasks = () => {
-    Alert.alert('Confirmação', 'Deseja realmente apagar todas as tarefas?', [
-      { text: 'Cancelar', style: 'cancel' },
+    Alert.alert("Confirmação", "Deseja realmente apagar todas as tarefas?", [
+      { text: "Cancelar", style: "cancel" },
       {
-        text: 'Apagar',
+        text: "Apagar",
         onPress: async () => {
           setTasks([]);
-          await AsyncStorage.removeItem('tasks');
+          await AsyncStorage.removeItem("tasks");
         },
       },
     ]);
@@ -63,4 +63,123 @@ export default function App() {
     setTasks(newTasks);
     saveTasks(newTasks);
   };
+
+  return (
+    <View style={styles.main}>
+      <View style={styles.container}>
+        <Text style={styles.title}>LISTA DE TAREFAS</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Digite uma nova tarefa"
+          value={task}
+          onChangeText={setTask}
+        />
+        <TouchableOpacity style={styles.button} onPress={addTask}>
+          <Text style={styles.buttonText}>Adicionar Tarefa</Text>
+        </TouchableOpacity>{" "}
+        {tasks.length === 0 ? (
+          <Text style={styles.noTasks}>Nenhuma tarefa adicionada.</Text>
+        ) : (
+          <FlatList
+          style={styles.list}
+            data={tasks}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => (
+              <View style={styles.taskItem}>
+                <Text style={styles.taskText}>{item}</Text>
+                <TouchableOpacity onPress={() => removeTask(index)}>
+                  <Text style={styles.deleteButton}>Excluir</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+        )}
+        <TouchableOpacity style={styles.button} onPress={clearAllTasks}>
+          <Text style={styles.buttonText}>Remover Todas as Tasks</Text>
+        </TouchableOpacity>{" "}
+      </View>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  main: {
+    backgroundColor: "#ED4A2B",
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  container: {
+    backgroundColor: "#2E2E2E",
+    width: "70%",
+    height: "80%",
+    borderRadius: 50,
+    padding: 20,
+    boxShadow: "0 16px 64px rgba(0, 0, 0, 0.32)",
+    display: "flex",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 48,
+    fontWeight: "bold",
+    marginBottom: 20,
+    color: "#FFFFFF",
+    textAlign: "center",
+  },
+  input: {
+    borderColor: "#ED4A2B",
+    borderWidth: 5,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+    borderRadius: 50,
+    backgroundColor: "#FFFFFF",
+    width: "60%",
+    height: 50,
+  },
+  button: {
+    backgroundColor: "#ED4A2B",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 10,
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  noTasks: {
+    fontSize: 16,
+    color: "#888",
+    textAlign: "center",
+    marginTop: 20,
+  },
+  list: {
+    backgroundColor: "#ED4A2B",
+    width: "80%",
+    borderRadius: 50,
+    padding: 15,
+  },
+  taskItem: {
+    borderColor: "#ED4A2B",
+    borderWidth: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+    width: "100%",
+    backgroundColor: "#FFFFFF",
+  },
+  taskText: {
+    fontSize: 16,
+  },
+  deleteButton: {
+    color: "red",
+    fontWeight: "bold",
+  },
+});
