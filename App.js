@@ -114,8 +114,8 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: "#2E2E2E",
-    width: "70%",
-    height: "80%",
+    width: "90%",
+    height: "95%",
     borderRadius: 50,
     padding: 20,
     boxShadow: "0 16px 64px rgba(0, 0, 0, 0.32)",
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   input: {
     borderColor: "#ED4A2B",
     borderWidth: 4,
-    marginBottom: 20,
+    marginBottom: 10,
     paddingHorizontal: 10,
     borderRadius: 50,
     backgroundColor: "#FFFFFF",
@@ -144,7 +144,6 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 50,
     alignItems: "center",
-    marginTop: 10,
     width: "90%",
   },
   buttonText: {
@@ -154,13 +153,13 @@ const styles = StyleSheet.create({
   },
   noTasks: {
     fontSize: 16,
-    color: "#888",
+    color: "#FFFFFF",
     textAlign: "center",
   },
   list: {
     backgroundColor: "#ED4A2B",
     width: "90%",
-    borderRadius: 50,
+    borderRadius: 25,
     padding: 20,
     margin: 10,
   },
